@@ -13,7 +13,7 @@ const Meeting = ({ params } : { params : { id : string }}) => {
 
   const { call, isCallLoading } = useGetCallById(params.id);
 
-  const {user, isLoaded} = useUser();
+  const {isLoaded} = useUser();
 
   if(!isLoaded || isCallLoading) return <Loader />;
 
