@@ -7,7 +7,13 @@ const Home = () => {
 
   const { upcomingCalls } = useGetCalls();
 
-  const upcomingCallTime = upcomingCalls.map((call) => call?.state?.startsAt).sort((a, b) => (a as any) - (b as any))[0];
+  const upcomingCallTime = upcomingCalls
+  .map((call) => call?.state?.startsAt)
+  .sort((a: Date | undefined, b: Date | undefined) => {
+    const dateA = a ? new Date(a).getTime() : 0;
+    const dateB = b ? new Date(b).getTime() : 0;
+    return dateA - dateB;
+  })[0];
 
   const now = new Date();
   const time = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
